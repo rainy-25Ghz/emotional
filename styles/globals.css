@@ -18,3 +18,9 @@ a {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "laihu";
+    src: url("/fonts/laihu/laihu.ttf");
+    font-display: swap;
+}
