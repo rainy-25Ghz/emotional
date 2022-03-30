@@ -3,13 +3,9 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { TextField } from "@mui/material";
 import { useState, useEffect } from "react";
+import SwipeableEdgeDrawer from "../components/Drawer";
 export default function Home() {
-    const [value, setValue] =useState("Controlled");
-
-    const handleChange = (event) => {
-        setValue(event.target.value);
-        console.log(event.target.value);
-    };
+    
     return (
         <div className={styles.container}>
             <Head>
@@ -22,14 +18,8 @@ export default function Home() {
             </Head>
 
             <main className={styles.main}>
-                <TextField
-                    id="outlined-multiline-flexible"
-                    label="Multiline"
-                    multiline
-                    maxRows={4}
-                    value={value}
-                    onChange={handleChange}
-                />
+                
+                <SwipeableEdgeDrawer></SwipeableEdgeDrawer>
             </main>
 
             <footer className={styles.footer}>
