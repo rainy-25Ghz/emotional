@@ -52,7 +52,7 @@ export type Inputs = {
     letterSpacing: number;
     fontWeight: number;
     fontSize: number;
-    fontFamily: "laihu" | "genyo" | "1ming" | "song" | "taipei" | "serif";
+    fontFamily: "laihu" | "genyo" | "ming" | "taipei" | "serif";
     textAlign: "left" | "right" | "center";
     vertical: boolean;
     fontColor: string;
@@ -86,6 +86,10 @@ const Text = ({ control }: { control: Control<Inputs, any> }) => {
         name: "fontFamily",
     });
 
+    const letterSpacing = useWatch({
+        control,
+        name: "letterSpacing",
+    });
     const fontSize = useWatch({
         control,
         name: "fontSize",
@@ -100,7 +104,7 @@ const Text = ({ control }: { control: Control<Inputs, any> }) => {
         control,
         name: "padding",
     });
-    console.log(text);
+    console.log(letterSpacing);
     return (
         <Box className="flex items-center w-full justify-center ">
             <Box
@@ -117,6 +121,7 @@ const Text = ({ control }: { control: Control<Inputs, any> }) => {
                     fontFamily,
                     fontSize,
                     lineHeight,
+                    letterSpacing:`${letterSpacing}px`,
                 }}
             >
                 {text}
@@ -124,30 +129,29 @@ const Text = ({ control }: { control: Control<Inputs, any> }) => {
         </Box>
     );
 };
-
+const cfg = {
+    defaultValues: {
+        backgroundColor: "#FFFFFF",
+        fontColor: "#000000",
+        text: `
+想起来的是夜晚的残像
+瞳孔渗出的那引力 如同电影一样的风景
+像是在说谎吧？`,
+        fontFamily: "genyo" as Inputs["fontFamily"],
+        fontSize: 20,
+        lineHeight: 2,
+        padding: 12,
+        textAlign: "center",
+        letterSpacing: 0.5,
+    } as Inputs,
+};
 export default function SwipeableEdgeDrawer() {
     const {
         register,
         watch,
         control,
         formState: { errors },
-    } = useForm<Inputs>({
-        defaultValues: {
-            backgroundColor: "#FFFFFF",
-            fontColor: "#000000",
-            text: `
-思い出すのは 夜の残像
-想起来的是夜晚的残像
-渗む瞳のその引力を 映画みたいな风景のこと
-瞳孔渗出的那引力 如同电影一样的风景
-嘘みたいだろう?
-像是在说谎吧？`,
-            fontFamily: "serif",
-            fontSize: 20,
-            lineHeight: 2,
-            padding: 12,
-        },
-    });
+    } = useForm<Inputs>(cfg);
 
     const [open, setOpen] = React.useState(false);
 
@@ -157,7 +161,7 @@ export default function SwipeableEdgeDrawer() {
     };
 
     return (
-        <Root>
+        <Root onClick={toggleDrawer(true)}>
             <Theme>
                 <Global
                     styles={{
@@ -170,9 +174,9 @@ export default function SwipeableEdgeDrawer() {
                     }}
                 />
                 <Box sx={{ textAlign: "center", pt: 1 }}>
-                    <Button onClick={toggleDrawer(true)} sx={{ fontSize: 16 }}>
+                    {/* <Button onClick={toggleDrawer(true)} sx={{ fontSize: 16 }}>
                         开启编辑
-                    </Button>
+                    </Button> */}
                 </Box>
                 <Text {...{ control }}></Text>
                 <SwipeableDrawer
@@ -245,7 +249,7 @@ export default function SwipeableEdgeDrawer() {
                             <TextField
                                 defaultValue={3}
                                 type={"number"}
-                                label="字间距"
+                                label="字间距(px)"
                                 inputProps={{
                                     inputMode: "numeric",
                                     pattern: "[0-9]*",
@@ -255,7 +259,6 @@ export default function SwipeableEdgeDrawer() {
                         </Box>
                         <Box className=" mt-4 flex">
                             <TextField
-                                defaultValue={24}
                                 type={"number"}
                                 label="行高"
                                 inputProps={{
@@ -280,14 +283,14 @@ export default function SwipeableEdgeDrawer() {
                             {/* <span className="mr-4">字体:</span> */}
                             <Select
                                 {...register("fontFamily")}
-                                defaultValue={"serif"}
+                                defaultValue={cfg.defaultValues.fontFamily}
                             >
                                 <MenuItem value={"laihu"}>濑户字体</MenuItem>
                                 <MenuItem value={"taipei"}>台北黑体</MenuItem>
                                 <MenuItem value={"serif"}>思源宋体</MenuItem>
                                 <MenuItem value={"genyo"}>源样明体</MenuItem>
                                 <MenuItem value={"gnu"}>GNU像素字体</MenuItem>
-                                <MenuItem value={"song"}>全字库正宋</MenuItem>
+                                {/* <MenuItem value={"song"}>全字库正宋</MenuItem> */}
                                 <MenuItem value={"ming"}>一点明体</MenuItem>
                             </Select>
                         </Box>
@@ -314,12 +317,17 @@ export default function SwipeableEdgeDrawer() {
                                     文本对齐
                                 </FormLabel>
                                 <Controller
-                                    defaultValue={"center"}
                                     control={control}
                                     name="textAlign"
                                     render={({ field }) => {
                                         return (
-                                            <RadioGroup {...field} row>
+                                            <RadioGroup
+                                                {...field}
+                                                defaultValue={
+                                                    cfg.defaultValues.textAlign
+                                                }
+                                                row
+                                            >
                                                 <FormControlLabel
                                                     value="left"
                                                     control={<Radio />}

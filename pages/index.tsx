@@ -51,7 +51,7 @@ export default function Home() {
                 ></link>
                 {/* public\fonts\taipei\TaipeiSansTCBeta-Regular.ttf public\fonts\quanziku\song.ttf public\fonts\GNU_unifont\unifont.ttf public\fonts\notoserif\NotoSerifSC.otf*/}
             </Head>
-            <main>
+            <main >
                 {/* <div>{text}</div> */}
                 <SwipeableEdgeDrawer></SwipeableEdgeDrawer>
             </main>

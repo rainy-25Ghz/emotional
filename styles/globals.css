@@ -18,6 +18,11 @@ a {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body, main, #__next {
+  margin: 0;
+  height: 100%;
+}
 /* 濑户字体 */
 @font-face {
     font-family: "laihu";
