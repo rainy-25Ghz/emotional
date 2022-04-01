@@ -18,9 +18,50 @@ a {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* 濑户字体 */
 @font-face {
     font-family: "laihu";
     src: url("/fonts/laihu/laihu.ttf");
     font-display: swap;
+}
+/* 源样明体 */
+@font-face {
+  font-family: "genyo";
+  src: url("/fonts/genyo/GenYoMinTW.ttf");
+  font-display: swap;
+}
+
+/* 一点明体 */
+@font-face {
+  font-family: "1ming";
+  src: url("/fonts/1ming/1Ming.ttf");
+  font-display: swap;
+}
+
+/* 全字库正宋 */
+@font-face {
+  font-family: "song";
+  src: url("/fonts/quanziku/song.ttf");
+  font-display: swap;
+}
+
+/* 台北黑体 */
+@font-face {
+  font-family: "taipei";
+  src: url("/fonts/taipei/TaipeiSansTCBeta-Regular.ttf");
+  font-display: swap;
+}
+
+/* 思源宋体 */
+@font-face {
+  font-family: "serif";
+  src: url("/fonts/notoserif/NotoSerifSC.otf");
+  font-display: swap;
+}
+
+/* /fonts/GNU_unifont/unifont.ttf */
+@font-face {
+  font-family: "gnu";
+  src: url("/fonts/GNU_unifont/unifont.ttf");
+  font-display: swap;
 }
