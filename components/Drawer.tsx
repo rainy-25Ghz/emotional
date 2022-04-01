@@ -58,6 +58,7 @@ export type Inputs = {
     fontColor: string;
     backgroundColor: string;
     lineHeight: number;
+    padding: number;
 };
 const Text = ({ control }: { control: Control<Inputs, any> }) => {
     const text = useWatch({
@@ -84,15 +85,22 @@ const Text = ({ control }: { control: Control<Inputs, any> }) => {
         control,
         name: "fontFamily",
     });
-    const fontSize = useForm({
+
+    const fontSize = useWatch({
         control,
         name: "fontSize",
     });
-    const lineHeight = useForm({
+
+    const lineHeight = useWatch({
         control,
         name: "lineHeight",
     });
 
+    const padding = useWatch({
+        control,
+        name: "padding",
+    });
+    console.log(text);
     return (
         <Box className="flex items-center w-full justify-center ">
             <Box
@@ -100,8 +108,9 @@ const Text = ({ control }: { control: Control<Inputs, any> }) => {
                 style={{
                     width: "90vw",
                     height: "90vw",
-                    backgroundColor,
+                    padding,
                     whiteSpace: "pre-line",
+                    backgroundColor,
                     textAlign: align,
                     color: fontColor,
                     writingMode: vertical ? "vertical-rl" : "unset",
@@ -126,17 +135,21 @@ export default function SwipeableEdgeDrawer() {
         defaultValues: {
             backgroundColor: "#FFFFFF",
             fontColor: "#000000",
-            text: `日日心疲力拙依旧吐露而出的歌声\n依稀往梦似曾见\n穿越悠长幽深的遥夜\n为了与你相会`,
+            text: `
+思い出すのは 夜の残像
+想起来的是夜晚的残像
+渗む瞳のその引力を 映画みたいな风景のこと
+瞳孔渗出的那引力 如同电影一样的风景
+嘘みたいだろう?
+像是在说谎吧？`,
             fontFamily: "serif",
             fontSize: 20,
-            lineHeight: 20,
+            lineHeight: 2,
+            padding: 12,
         },
     });
 
     const [open, setOpen] = React.useState(false);
-
-    // const values = watch();
-    // console.log(values, errors.letterSpacing);
 
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
@@ -202,15 +215,32 @@ export default function SwipeableEdgeDrawer() {
                             overflow: "auto",
                         }}
                     >
-                        <TextField
-                            className="mb-2"
-                            fullWidth
-                            variant="standard"
-                            label="文本"
-                            multiline
-                            maxRows={6}
-                            {...register("text", {})}
+                        <Controller
+                            name={"text"}
+                            control={control}
+                            render={({ field }) => (
+                                <TextField
+                                    className="mb-2"
+                                    {...field}
+                                    fullWidth
+                                    variant="standard"
+                                    label="文本"
+                                    multiline
+                                    maxRows={6}
+                                />
+                            )}
                         />
+                        <Box className=" mt-4 flex">
+                            <TextField
+                                type={"number"}
+                                label="边距"
+                                inputProps={{
+                                    inputMode: "numeric",
+                                    pattern: "[0-9]*",
+                                }}
+                                {...register("padding")}
+                            ></TextField>
+                        </Box>
                         <Box className=" mt-4 flex">
                             <TextField
                                 defaultValue={3}
@@ -248,14 +278,17 @@ export default function SwipeableEdgeDrawer() {
                         </Box>
                         <Box className=" mt-4 flex items-center">
                             {/* <span className="mr-4">字体:</span> */}
-                            <Select {...register("fontFamily")}>
+                            <Select
+                                {...register("fontFamily")}
+                                defaultValue={"serif"}
+                            >
                                 <MenuItem value={"laihu"}>濑户字体</MenuItem>
                                 <MenuItem value={"taipei"}>台北黑体</MenuItem>
                                 <MenuItem value={"serif"}>思源宋体</MenuItem>
                                 <MenuItem value={"genyo"}>源样明体</MenuItem>
                                 <MenuItem value={"gnu"}>GNU像素字体</MenuItem>
                                 <MenuItem value={"song"}>全字库正宋</MenuItem>
-                                <MenuItem value={"1ming"}>一点明体</MenuItem>
+                                <MenuItem value={"ming"}>一点明体</MenuItem>
                             </Select>
                         </Box>
                         <Box className="flex flex-row">

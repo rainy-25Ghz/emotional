@@ -33,7 +33,7 @@ a {
 
 /* 一点明体 */
 @font-face {
-  font-family: "1ming";
+  font-family: "ming";
   src: url("/fonts/1ming/1Ming.ttf");
   font-display: swap;
 }
