@@ -24,6 +24,7 @@ import { Control, Controller, useForm, useWatch } from "react-hook-form";
 import { SketchPicker } from "react-color";
 import { Theme } from "./Theme";
 import domtoimage from "dom-to-image";
+import html2canvas from "html2canvas";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -106,14 +107,41 @@ const Text = ({ control }: { control: Control<Inputs, any> }) => {
     control,
     name: "padding",
   });
-  console.log(letterSpacing);
+
   return (
-    <Box id="emo" className="flex items-center w-full justify-center ">
+    <Box
+      id="emo"
+      className="flex items-center w-full justify-center "
+      onClick={({ target }) => {
+        (async () => {
+          const node = document.getElementById("emo");
+          if (node) {
+            try {
+              console.time("dom2image");
+
+              const canvas = await html2canvas(node);
+              document.body.appendChild(canvas);
+              //   const dataUrl = await domtoimage.toPng(node, {
+              //     height: 1000,
+              //     width: 1000,
+              //   });
+              console.timeEnd("dom2image");
+              //   const link = document.createElement("a");
+              //   link.href = canvas.toDataURL();
+              //   link.download = "emo.png";
+              //   link.click();
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        })();
+      }}
+    >
       <Box
         className="flex items-center justify-center overflow-hidden "
         style={{
-          width: "90vw",
-          height: "90vw",
+          width: "500px",
+          height: "500px",
           padding,
           whiteSpace: "pre-line",
           backgroundColor,
@@ -124,6 +152,8 @@ const Text = ({ control }: { control: Control<Inputs, any> }) => {
           fontSize,
           lineHeight,
           letterSpacing: `${letterSpacing}px`,
+           textShadow: `1px 1px 10px rgb(255 255 255)` /* outer white */,
+        //   filter: `blur(0.5px)` /* glow range */,
         }}
       >
         {text}
@@ -133,8 +163,8 @@ const Text = ({ control }: { control: Control<Inputs, any> }) => {
 };
 const cfg = {
   defaultValues: {
-    backgroundColor: "#FFFFFF",
-    fontColor: "#000000",
+    backgroundColor: "#c62813",
+    fontColor: "#ffffff",
     text: `
 想起来的是夜晚的残像
 瞳孔渗出的那引力 如同电影一样的风景
@@ -147,6 +177,7 @@ const cfg = {
     letterSpacing: 0.5,
   } as Inputs,
 };
+
 export default function SwipeableEdgeDrawer() {
   const {
     register,
@@ -159,7 +190,7 @@ export default function SwipeableEdgeDrawer() {
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
-    console.log(newOpen);
+    // console.log(newOpen);
   };
 
   return (
@@ -183,29 +214,7 @@ export default function SwipeableEdgeDrawer() {
 
         <Text {...{ control }}></Text>
         <Box sx={{ textAlign: "center", pt: 1 }}>
-          <Button
-            sx={{ fontSize: 16 }}
-            onClick={async () => {
-              const node = document.getElementById("emo");
-              if (node) {
-                try {
-                  console.time("dom2image");
-                  const dataUrl = await domtoimage.toPng(node, {
-                    height: 1000,
-                    width: 1000,
-                  });
-                  console.timeEnd("dom2image");
-                  const img = new Image();
-                  img.src = dataUrl;
-                  document.body.appendChild(img);
-                } catch (error) {
-                  console.error(error);
-                }
-              }
-            }}
-          >
-            导出
-          </Button>
+          <Button sx={{ fontSize: 16 }}>导出</Button>
         </Box>
         <SwipeableDrawer
           BackdropProps={{
