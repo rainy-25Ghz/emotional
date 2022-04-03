@@ -109,39 +109,13 @@ const Text = ({ control }: { control: Control<Inputs, any> }) => {
   });
 
   return (
-    <Box
-      id="emo"
-      className="flex items-center w-full justify-center "
-      onClick={({ target }) => {
-        (async () => {
-          const node = document.getElementById("emo");
-          if (node) {
-            try {
-              console.time("dom2image");
-
-              const canvas = await html2canvas(node);
-              document.body.appendChild(canvas);
-              //   const dataUrl = await domtoimage.toPng(node, {
-              //     height: 1000,
-              //     width: 1000,
-              //   });
-              console.timeEnd("dom2image");
-              //   const link = document.createElement("a");
-              //   link.href = canvas.toDataURL();
-              //   link.download = "emo.png";
-              //   link.click();
-            } catch (error) {
-              console.error(error);
-            }
-          }
-        })();
-      }}
-    >
+    <Box className="flex items-center w-full justify-center ">
       <Box
+        id="emo"
         className="flex items-center justify-center overflow-hidden "
         style={{
-          width: "500px",
-          height: "500px",
+          width: "90vw",
+          height: "90vw",
           padding,
           whiteSpace: "pre-line",
           backgroundColor,
@@ -152,8 +126,8 @@ const Text = ({ control }: { control: Control<Inputs, any> }) => {
           fontSize,
           lineHeight,
           letterSpacing: `${letterSpacing}px`,
-           textShadow: `1px 1px 10px rgb(255 255 255)` /* outer white */,
-        //   filter: `blur(0.5px)` /* glow range */,
+          textShadow: `2px 0px 10px #fff` /* outer white */,
+          //   filter: `blur(0.5px)` /* glow range */,
         }}
       >
         {text}
@@ -214,7 +188,27 @@ export default function SwipeableEdgeDrawer() {
 
         <Text {...{ control }}></Text>
         <Box sx={{ textAlign: "center", pt: 1 }}>
-          <Button sx={{ fontSize: 16 }}>导出</Button>
+          <Button
+            sx={{ fontSize: 16 }}
+            onClick={async () => {
+              const node = document.getElementById("emo");
+              if (node) {
+                try {
+                  console.time("dom2image");
+                  const canvas = await html2canvas(node);
+                  console.timeEnd("dom2image");
+                  const link = document.createElement("a");
+                  link.href = canvas.toDataURL();
+                  link.download = "emo.png";
+                  link.click();
+                } catch (error) {
+                  console.error(error);
+                }
+              }
+            }}
+          >
+            导出
+          </Button>
         </Box>
         <SwipeableDrawer
           BackdropProps={{
