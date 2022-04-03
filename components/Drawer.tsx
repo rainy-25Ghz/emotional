@@ -190,10 +190,9 @@ export default function SwipeableEdgeDrawer() {
               if (node) {
                 try {
                   const dataUrl = await domtoimage.toPng(node);
-                  const link = document.createElement("a");
-                  link.href = dataUrl;
-                  link.download = "emo.png";
-                  link.click();
+                  const img = new Image();
+                  img.src = dataUrl;
+                  document.body.appendChild(img);
                 } catch (error) {
                   console.error(error);
                 }
