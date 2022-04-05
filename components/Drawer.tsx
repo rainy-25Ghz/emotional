@@ -126,7 +126,8 @@ const Text = ({ control }: { control: Control<Inputs, any> }) => {
           fontSize,
           lineHeight,
           letterSpacing: `${letterSpacing}px`,
-          textShadow: `2px 0px 10px #fff` /* outer white */,
+          fontWeight:"lighter"
+          // textShadow: `2px 0px 10px #fff` /* outer white */,
           //   filter: `blur(0.5px)` /* glow range */,
         }}
       >
@@ -137,11 +138,12 @@ const Text = ({ control }: { control: Control<Inputs, any> }) => {
 };
 const cfg = {
   defaultValues: {
-    backgroundColor: "#c62813",
-    fontColor: "#ffffff",
+    backgroundColor: "#ffffff",
+    fontColor: "#000000",
     text: `
 想起来的是夜晚的残像
-瞳孔渗出的那引力 如同电影一样的风景
+瞳孔渗出的那引力 
+如同电影一样的风景
 像是在说谎吧？`,
     fontFamily: "genyo" as Inputs["fontFamily"],
     fontSize: 20,
