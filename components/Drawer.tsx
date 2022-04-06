@@ -328,11 +328,11 @@ export default function SwipeableEdgeDrawer() {
             <Box className="flex flex-row">
               <Box className=" mt-4 flex">
                 <span className="mr-2">字体颜色</span>
-                <input type={"color"} {...register("fontColor")}></input>
+                <input className="shadow-md" type={"color"} {...register("fontColor")}></input>
               </Box>
               <Box className="ml-4 mt-4 flex">
                 <span className="mr-2">背景颜色</span>
-                <input type={"color"} {...register("backgroundColor")}></input>
+                <input   className="shadow-md" type={"color"} {...register("backgroundColor")}></input>
               </Box>
             </Box>
 
