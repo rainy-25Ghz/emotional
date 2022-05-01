@@ -8,5 +8,7 @@ export const theme:Theme={
     "8-bit":{
 
     },
-    ""
+    "白纸":{
+
+    }
 }

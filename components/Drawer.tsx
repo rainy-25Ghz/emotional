@@ -125,7 +125,7 @@ const Text = ({
                 style={{
                     width: "90vw",
                     height: "90vw",
-                    padding,
+                    padding:`${padding}px`,
                     whiteSpace: "pre-line",
                     backgroundColor,
                     textAlign: align,
