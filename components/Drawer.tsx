@@ -56,7 +56,7 @@ export type Inputs = {
     fontWeight: number;
     fontSize: number;
     fontFamily:
-        | "laihu"
+        | "yozai"
         | "genyo"
         | "ming"
         | "taipei"
@@ -367,8 +367,8 @@ export default function SwipeableEdgeDrawer() {
                                         .fontFamily
                                 }
                             >
-                                <MenuItem value={"laihu"}>
-                                    濑户字体
+                                <MenuItem value={"yozai"}>
+                                    悠哉字体
                                 </MenuItem>
                                 <MenuItem value={"taipei"}>
                                     台北黑体
@@ -382,10 +382,8 @@ export default function SwipeableEdgeDrawer() {
                                 <MenuItem value={"gnu"}>
                                     GNU像素字体
                                 </MenuItem>
-                                {/* <MenuItem value={"song"}>全字库正宋</MenuItem> */}
-                                <MenuItem value={"ming"}>
-                                    一点明体
-                                </MenuItem>
+
+                        
                             </Select>
                         </Box>
                         <Box className="flex flex-row">

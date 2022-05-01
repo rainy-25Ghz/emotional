@@ -19,18 +19,23 @@ a {
 @tailwind components;
 @tailwind utilities;
 
-html, body, main, #__next {
+html,
+body,
+main,
+#__next {
   margin: 0;
   height: 100%;
 }
-/* 濑户字体 */
+
+/* yozai字体 */
 @font-face {
 
-    font-family: "laihu";
-    src: url("/fonts/laihu/laihu.ttf");
-    font-display: swap;
-    font-weight: 100;
+  font-family: "yozai";
+  src: url("/fonts/yozai/Yozai-Light.ttf");
+  font-display: swap;
+  font-weight: 100;
 }
+
 /* 源样明体 */
 @font-face {
   font-family: "genyo";
@@ -38,12 +43,6 @@ html, body, main, #__next {
   font-display: swap;
 }
 
-/* 一点明体 */
-@font-face {
-  font-family: "ming";
-  src: url("/fonts/1ming/1Ming.ttf");
-  font-display: swap;
-}
 
 /* 全字库正宋 */
 @font-face {
