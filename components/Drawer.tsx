@@ -27,6 +27,7 @@ import { Theme } from "./Theme";
 import html2canvas from "html2canvas";
 import Edit from "./Edit";
 import Download from "./Download";
+import { themes } from "./constants";
 
 const StyledBox = styled(Box)(({ theme }) => ({
     backgroundColor: "#fff",
@@ -58,7 +59,7 @@ export type Inputs = {
     fontFamily:
         | "yozai"
         | "genyo"
-        | "ming"
+        | "gnu"
         | "taipei"
         | "serif";
     textAlign: "left" | "right" | "center";
@@ -67,6 +68,7 @@ export type Inputs = {
     backgroundColor: string;
     lineHeight: number;
     padding: number;
+    theme: keyof typeof themes;
 };
 const Text = ({
     control,
@@ -118,14 +120,14 @@ const Text = ({
     });
 
     return (
-        <Box className=" drop-shadow-xl flex items-center w-full justify-center ">
+        <Box className=" mt-16 z-40 drop-shadow-xl flex items-center w-full justify-center ">
             <Box
                 id="emo"
                 className="flex items-center justify-center overflow-hidden "
                 style={{
                     width: "90vw",
                     height: "90vw",
-                    padding:`${padding}px`,
+                    padding: `${padding}px`,
                     whiteSpace: "pre-line",
                     backgroundColor,
                     textAlign: align,
@@ -162,14 +164,42 @@ const cfg = {
         padding: 12,
         textAlign: "center",
         letterSpacing: 0.5,
+        theme: "白纸",
     } as Inputs,
 };
 
 export default function SwipeableEdgeDrawer() {
-    const { register, control } = useForm<Inputs>(cfg);
-
+    const { register, control, setValue } =
+        useForm<Inputs>(cfg);
+    const theme = useWatch({
+        control,
+        name: "theme",
+    });
     const [open, setOpen] = React.useState(false);
-
+    React.useEffect(() => {
+        const emo=document.getElementById("emo");
+        if(!emo) return;
+       
+        switch (theme) {
+            case "赤齣":
+                setValue("backgroundColor", "#c62813");
+                setValue("fontColor","#ffffff");
+                emo.style.textShadow="2px 0px 10px #ffffffe5, 0px 2px 7px #918b8b3d";
+                break;
+            case "白纸":
+                setValue("backgroundColor", "#ffffff");
+                setValue("fontColor","#000000");
+                emo.style.textShadow="";
+                break;
+            case "8-bit":
+              setValue("backgroundColor", "#000000");
+              setValue("fontColor","#00e21a");
+              setValue("fontFamily","gnu");
+              emo.style.textShadow="2px 0px 10px #009100e3, 0px 2px 7px #918b8b3d";
+              emo.style.fontWeight="500";
+              break;
+        }
+    }, [theme]);
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
     };
@@ -190,7 +220,7 @@ export default function SwipeableEdgeDrawer() {
                     }}
                 />
                 <Box
-                    className="flex justify-between my-3"
+                    className=" w-full z-50 fixed top-0 flex justify-between my-3"
                     sx={{ textAlign: "center", pt: 1 }}
                 >
                     <Box className="flex-1 flex justify-center">
@@ -204,7 +234,6 @@ export default function SwipeableEdgeDrawer() {
                     </Box>
                     <Box className="flex-1 flex justify-center">
                         <Button
-                            className="flex-1"
                             startIcon={
                                 <Download></Download>
                             }
@@ -248,7 +277,7 @@ export default function SwipeableEdgeDrawer() {
                     </Box>
                 </Box>
 
-                <Text  {...{ control }}></Text>
+                <Text {...{ control }}></Text>
 
                 <SwipeableDrawer
                     BackdropProps={{
@@ -265,16 +294,10 @@ export default function SwipeableEdgeDrawer() {
                     }}
                 >
                     <StyledBox
-                        // className=" border-0 border-b border-solid  border-gray-500"
                         sx={{
-                            // position: "absolute",
-                            // top: -drawerBleeding,
                             borderTopLeftRadius: 16,
                             borderTopRightRadius: 16,
                             borderBottomStyle: "solid",
-                            // visibility: "visible",
-                            // right: 0,
-                            // left: 0,
                         }}
                     >
                         <Puller />
@@ -295,6 +318,33 @@ export default function SwipeableEdgeDrawer() {
                             overflow: "auto",
                         }}
                     >
+                        <Box className=" my-4 flex items-center">
+                            <span className="mr-4">
+                                主题：
+                            </span>
+                            <Select
+                                {...register("theme")}
+                                defaultValue={
+                                    cfg.defaultValues.theme
+                                }
+                            >
+                                <MenuItem value={"白纸"}>
+                                    白纸
+                                </MenuItem>
+                                <MenuItem value={"赤齣"}>
+                                    赤齣
+                                </MenuItem>
+                                <MenuItem value={"8-bit"}>
+                                    8-bit
+                                </MenuItem>
+                                <MenuItem value={"春日"}>
+                                    春日
+                                </MenuItem>
+                                <MenuItem value={"樱"}>
+                                    樱
+                                </MenuItem>
+                            </Select>
+                        </Box>
                         <Controller
                             name={"text"}
                             control={control}
@@ -382,8 +432,6 @@ export default function SwipeableEdgeDrawer() {
                                 <MenuItem value={"gnu"}>
                                     GNU像素字体
                                 </MenuItem>
-
-                        
                             </Select>
                         </Box>
                         <Box className="flex flex-row">

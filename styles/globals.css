@@ -71,3 +71,8 @@ main,
   src: url("/fonts/GNU_unifont/unifont.ttf");
   font-display: swap;
 }
+
+.shadow_aka{
+  text-shadow: 2px 0px 10px #fff, 0px 2px 5px #52484823; /* outer white */
+  filter: blur(0.5px); /* glow range */
+}
