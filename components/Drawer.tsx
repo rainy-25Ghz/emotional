@@ -177,28 +177,34 @@ export default function SwipeableEdgeDrawer() {
     });
     const [open, setOpen] = React.useState(false);
     React.useEffect(() => {
-        const emo=document.getElementById("emo");
-        if(!emo) return;
-       
+        const emo = document.getElementById("emo");
+        if (!emo) return;
+
         switch (theme) {
             case "赤齣":
                 setValue("backgroundColor", "#c62813");
-                setValue("fontColor","#ffffff");
-                emo.style.textShadow="2px 0px 10px #ffffffe5, 0px 2px 7px #918b8b3d";
+                setValue("fontColor", "#ffffff");
+                emo.style.textShadow =
+                    "2px 0px 10px #ffffffe5, 0px 2px 7px #918b8b3d";
+                emo.style.fontWeight = "";
+                emo.style.filter = "";
                 break;
             case "白纸":
                 setValue("backgroundColor", "#ffffff");
-                setValue("fontColor","#000000");
-                emo.style.textShadow="";
+                setValue("fontColor", "#000000");
+                emo.style.textShadow = "";
+                emo.style.fontWeight = "";
+                emo.style.filter = "";
                 break;
             case "8-bit":
-              setValue("backgroundColor", "#000000");
-              setValue("fontColor","#00d018");
-              setValue("fontFamily","gnu");
-              emo.style.textShadow="rgba(97, 219, 97, 0.89) 4px 0px 11px, rgba(230, 251, 251, 0.37) 0px 2px 7px";
-              emo.style.fontWeight="500";
-              emo.style.filter="saturate(1.5)";
-              break;
+                setValue("backgroundColor", "#000000");
+                setValue("fontColor", "#00d018");
+                setValue("fontFamily", "gnu");
+                emo.style.textShadow =
+                    "rgba(97, 219, 97, 0.89) 4px 0px 11px, rgba(230, 251, 251, 0.37) 0px 2px 7px";
+                emo.style.fontWeight = "500";
+                emo.style.filter = "saturate(1.5)";
+                break;
         }
     }, [theme]);
     const toggleDrawer = (newOpen: boolean) => () => {
