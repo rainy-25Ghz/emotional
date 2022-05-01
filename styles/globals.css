@@ -68,7 +68,7 @@ main,
 /* /fonts/GNU_unifont/unifont.ttf */
 @font-face {
   font-family: "gnu";
-  src: url("/fonts/GNU_unifont/unifont.ttf");
+  src: url("/fonts/GNU_unifont/LanaPixel.ttf");
   font-display: swap;
 }
 

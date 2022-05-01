@@ -201,7 +201,7 @@ export default function SwipeableEdgeDrawer() {
                 setValue("fontColor", "#00d018");
                 setValue("fontFamily", "gnu");
                 emo.style.textShadow =
-                    "rgba(97, 219, 97, 0.89) 4px 0px 11px, rgba(230, 251, 251, 0.37) 0px 2px 7px";
+                    "rgb(0, 185, 0) 2px 0px 14px, rgb(0, 76, 44) 0px 2px 16px";
                 emo.style.fontWeight = "500";
                 emo.style.filter = "saturate(1.5)";
                 break;
