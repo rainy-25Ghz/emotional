@@ -1,7 +1,7 @@
 
-export type Themes={[key:string]:}
+export type Themes={[key:string]:any}
 
-export const theme:Theme={
+export const theme:Themes={
     "赤齣":{
 
     },
