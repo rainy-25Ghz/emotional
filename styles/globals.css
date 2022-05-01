@@ -25,9 +25,11 @@ html, body, main, #__next {
 }
 /* 濑户字体 */
 @font-face {
+
     font-family: "laihu";
     src: url("/fonts/laihu/laihu.ttf");
     font-display: swap;
+    font-weight: 100;
 }
 /* 源样明体 */
 @font-face {
