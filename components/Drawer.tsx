@@ -193,10 +193,11 @@ export default function SwipeableEdgeDrawer() {
                 break;
             case "8-bit":
               setValue("backgroundColor", "#000000");
-              setValue("fontColor","#00e21a");
+              setValue("fontColor","#00d018");
               setValue("fontFamily","gnu");
-              emo.style.textShadow="2px 0px 10px #009100e3, 0px 2px 7px #918b8b3d";
+              emo.style.textShadow="rgba(97, 219, 97, 0.89) 4px 0px 11px, rgba(230, 251, 251, 0.37) 0px 2px 7px";
               emo.style.fontWeight="500";
+              emo.style.filter="saturate(1.5)";
               break;
         }
     }, [theme]);
